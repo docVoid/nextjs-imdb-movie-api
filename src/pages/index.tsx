@@ -1,11 +1,56 @@
-export default function Home() {
-  return <div>Hello From home</div>;
+import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { searchMovies } from '@/lib/tmdb';
+import SearchBar from '@/components/searchbar';
+import MovieList from '@/components/movielist';
+import { Movie } from '@/lib/tmdb';
+
+type Props = {
+  results: Movie[];
+  initialQuery: string;
+};
+
+export default function Home({ results, initialQuery }: Props) {
+  const router = useRouter();
+  const [query, setQuery] = useState(initialQuery);
+
+  const handleSearch = () => {
+    if (!query.trim()) return;
+    router.push(`/?query=${encodeURIComponent(query)}`);
+  };
+
+  return (
+    <main className="min-h-screen p-4 flex flex-col items-center bg-gray-100">
+      <h1 className="text-2xl font-bold mb-4">Filmsuche</h1>
+      <SearchBar query={query} setQuery={setQuery} onSearch={handleSearch} />
+
+      {initialQuery && results.length === 0 ? (
+        <p className="text-gray-600">Keine Ergebnisse.</p>
+      ) : results.length > 0 ? (
+        <MovieList movies={results} />
+      ) : null}
+    </main>
+  );
 }
 
-//server-side rendering
-export async function getServerSideProps() {
-  // You can fetch data here and pass it as props
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const query = context.query.query as string || '';
+  let results: Movie[] = [];
+
+  if (query.trim()) {
+    try {
+      const data = await searchMovies(query);
+      results = data.results;
+    } catch (error) {
+      console.error('Fehler bei der Suche:', error);
+    }
+  }
+
   return {
-    props: {}, // will be passed to the page component as props
+    props: {
+      results,
+      initialQuery: query,
+    },
   };
-}
+};
