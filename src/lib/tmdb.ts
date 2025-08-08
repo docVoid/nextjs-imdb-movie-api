@@ -17,7 +17,7 @@ export async function searchMovies(query: string) {
     throw new Error("fehler beim abrufen der filme");
   }
 
-  return res.json();
+  return res.json() as Promise<MovieSearchResponse>;
 }
 
 export type Movie = {
@@ -25,6 +25,7 @@ export type Movie = {
   title: string;
   release_date: string;
   poster_path: string | null;
+  overview?: string;
 };
 
 export type MovieSearchResponse = {

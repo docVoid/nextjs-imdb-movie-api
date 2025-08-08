@@ -5,6 +5,7 @@ import { searchMovies } from '@/lib/tmdb';
 import SearchBar from '@/components/searchbar';
 import MovieList from '@/components/movielist';
 import { Movie } from '@/lib/tmdb';
+import Link from 'next/link';
 
 type Props = {
   results: Movie[];
@@ -24,6 +25,16 @@ export default function Home({ results, initialQuery }: Props) {
     <main className="min-h-screen p-4 flex flex-col items-center bg-gray-100">
       <h1 className="text-2xl font-bold mb-4">Filmsuche</h1>
       <SearchBar query={query} setQuery={setQuery} onSearch={handleSearch} />
+
+      {initialQuery && (
+        <div className="self-start mb-4">
+          <Link href="/">
+            <span className="text-blue-600 cursor-pointer" onClick={(e) => { e.preventDefault(); window.location.href = "/"; }}>
+              ← Zurück
+            </span>
+          </Link>
+        </div>
+      )}
 
       {initialQuery && results.length === 0 ? (
         <p className="text-gray-600">Keine Ergebnisse.</p>
