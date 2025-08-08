@@ -14,7 +14,7 @@ export async function searchMovies(query: string) {
   );
 
   if (!res.ok) {
-    throw new Error("fehler beim abrufen der filme");
+    throw new Error("error retrieving movies");
   }
 
   return res.json() as Promise<MovieSearchResponse>;

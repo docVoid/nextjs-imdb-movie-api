@@ -17,13 +17,13 @@ export default function SearchBar({ query, setQuery, onSearch }: Props) {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={handleKeyDown}
-        placeholder="Film suchen ..."
+        placeholder="enter movie name"
       />
       <button
         className="px-4 py-2 bg-yellow-500 text-white rounded-r-md hover:bg-orange-500 cursor-pointer"
         onClick={onSearch}
       >
-        Suchen
+        search
       </button>
     </div>
   );

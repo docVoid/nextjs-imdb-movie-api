@@ -18,9 +18,9 @@ export default function MovieDetailPage({ movie }: Props) {
   if (!movie) {
     return (
       <div className="p-4 text-center">
-        <p>Film nicht gefunden.</p>
-        <Link href={from ? `/?query=${encodeURIComponent(from)}` : "/"} className="text-blue-600 underline">
-          ← Zurück
+        <p>movie not found.</p>
+        <Link href={from ? `/?query=${encodeURIComponent(from)}` : "/"} className="text-blue-600">
+          ← back
         </Link>
       </div>
     );
@@ -28,8 +28,8 @@ export default function MovieDetailPage({ movie }: Props) {
 
   return (
     <main className="min-h-screen p-4 flex flex-col items-center bg-gray-100">
-      <Link href={from ? `/?query=${encodeURIComponent(from)}` : "/"} className="mb-4 text-blue-600 underline self-start">
-        ← Zurück
+      <Link href={from ? `/?query=${encodeURIComponent(from)}` : "/"} className="mb-4 text-blue-600 self-start">
+        ← back
       </Link>
 
       {movie.poster_path && (
@@ -41,7 +41,7 @@ export default function MovieDetailPage({ movie }: Props) {
       )}
 
       <h1 className="text-3xl font-bold mb-2">{movie.title}</h1>
-      <p className="text-gray-600 mb-1">Veröffentlichung: {movie.release_date}</p>
+      <p className="text-gray-600 mb-1">release date: {movie.release_date}</p>
       <p className="text-gray-700 max-w-2xl text-center">{movie.overview}</p>
     </main>
   );
@@ -58,14 +58,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     );
 
     if (!res.ok) {
-      throw new Error('Fehler beim Abrufen der Filmdetails');
+      throw new Error('error retrieving movie details');
     }
 
     const movie = (await res.json()) as Movie;
 
     return { props: { movie } };
   } catch (error) {
-    console.error('Detailseiten-Fehler:', error);
+    console.error('detail page error:', error);
     return { props: { movie: null } };
   }
 };
