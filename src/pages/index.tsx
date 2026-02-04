@@ -48,7 +48,6 @@ export default function Home({ results, initialQuery }: Props) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const query = context.query.query as string || '';
   let results: Movie[] = [];
-
   if (query.trim()) {
     try {
       const data = await searchMovies(query);
