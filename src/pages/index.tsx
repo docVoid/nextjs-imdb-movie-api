@@ -22,14 +22,14 @@ export default function Home({ results, initialQuery }: Props) {
   };
 
   return (
-    <main className="min-h-screen p-4 flex flex-col items-center bg-gray-100">
-      <h1 className="text-2xl font-bold mb-4">Movie search</h1>
+    <main className="min-h-screen p-4 flex flex-col items-center bg-gray-100 dark:bg-gray-900">
+      <h1 className="text-2xl font-bold mb-4 dark:text-white">Movie search</h1>
       <SearchBar query={query} setQuery={setQuery} onSearch={handleSearch} />
 
       {initialQuery && (
         <div className="self-start mb-4">
           <Link href="/">
-            <span className="text-blue-600 cursor-pointer" onClick={(e) => { e.preventDefault(); window.location.href = "/"; }}>
+            <span className="text-blue-600 dark:text-blue-400 cursor-pointer" onClick={(e) => { e.preventDefault(); window.location.href = "/"; }}>
               ← back
             </span>
           </Link>
@@ -37,7 +37,7 @@ export default function Home({ results, initialQuery }: Props) {
       )}
 
       {initialQuery && results.length === 0 ? (
-        <p className="text-gray-600">no results.</p>
+        <p className="text-gray-600 dark:text-gray-400">no results.</p>
       ) : results.length > 0 ? (
         <MovieList movies={results} />
       ) : null}

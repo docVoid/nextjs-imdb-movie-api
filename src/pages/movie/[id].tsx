@@ -17,9 +17,9 @@ export default function MovieDetailPage({ movie }: Props) {
   
   if (!movie) {
     return (
-      <div className="p-4 text-center">
+      <div className="p-4 text-center dark:text-white">
         <p>movie not found.</p>
-        <Link href={from ? `/?query=${encodeURIComponent(from)}` : "/"} className="text-blue-600">
+        <Link href={from ? `/?query=${encodeURIComponent(from)}` : "/"} className="text-blue-600 dark:text-blue-400">
           ← back
         </Link>
       </div>
@@ -27,8 +27,8 @@ export default function MovieDetailPage({ movie }: Props) {
   }
 
   return (
-    <main className="min-h-screen p-4 flex flex-col items-center bg-gray-100">
-      <Link href={from ? `/?query=${encodeURIComponent(from)}` : "/"} className="mb-4 text-blue-600 self-start">
+    <main className="min-h-screen p-4 flex flex-col items-center bg-gray-100 dark:bg-gray-900">
+      <Link href={from ? `/?query=${encodeURIComponent(from)}` : "/"} className="mb-4 text-blue-600 dark:text-blue-400 self-start">
         ← back
       </Link>
 
@@ -40,9 +40,9 @@ export default function MovieDetailPage({ movie }: Props) {
         />
       )}
 
-      <h1 className="text-3xl font-bold mb-2">{movie.title}</h1>
-      <p className="text-gray-600 mb-1">release date: {movie.release_date}</p>
-      <p className="text-gray-700 max-w-2xl text-center">{movie.overview}</p>
+      <h1 className="text-3xl font-bold mb-2 dark:text-white">{movie.title}</h1>
+      <p className="text-gray-600 dark:text-gray-400 mb-1">release date: {movie.release_date}</p>
+      <p className="text-gray-700 dark:text-gray-300 max-w-2xl text-center">{movie.overview}</p>
     </main>
   );
 }

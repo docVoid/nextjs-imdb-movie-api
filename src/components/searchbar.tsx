@@ -12,7 +12,7 @@ export default function SearchBar({ query, setQuery, onSearch }: Props) {
   return (
     <div className="w-full max-w-md flex mb-6">
       <input
-        className="flex-1 p-2 rounded-l-md border border-gray-300 focus:outline-none"
+        className="flex-1 p-2 rounded-l-md border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white focus:outline-none"
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
